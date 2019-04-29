@@ -4,6 +4,7 @@ import types
 
 
 class ListaNodos(collections.deque):
+   #try
     def añadir(self, nodo):
         self.append(nodo)
 
