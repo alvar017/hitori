@@ -4,7 +4,7 @@ import types
 
 
 class ListaNodos(collections.deque):
-   #try
+    # try commit
     def añadir(self, nodo):
         self.append(nodo)
 
@@ -167,6 +167,7 @@ class BúsquedaEnProfundidad(BúsquedaGeneral):
                         self.append(último_nodo)
                         break
             self.append(nodo)
+
         self.explorados.añadir = types.MethodType(añadir_vaciando_rama,
                                                   self.explorados)
 
@@ -213,6 +214,7 @@ class BúsquedaÓptima(BúsquedaPrimeroElMejor):
     def __init__(self, detallado=False):
         def coste(nodo):
             return nodo.coste
+
         super().__init__(coste, detallado)
 
 
@@ -223,4 +225,5 @@ class BúsquedaAEstrella(BúsquedaPrimeroElMejor):
 
         def f(nodo):
             return coste(nodo) + h(nodo)
+
         super().__init__(f, detallado)
