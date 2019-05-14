@@ -4,7 +4,7 @@ import types
 
 
 class ListaNodos(collections.deque):
-    # try commit
+    # .append == .add
     def añadir(self, nodo):
         self.append(nodo)
 
