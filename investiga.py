@@ -36,6 +36,7 @@ class CrossOut(probee.Acción):
     def exist_black_cell_around(self, estado):
         aux = 0
         res = False
+
         if self.cell_row != 0 and self.cell_row != 0 and estado[self.cell_row-1][self.cell_colum] == 0:
             aux = aux + 1
         if aux == 0 and self.cell_colum != 0 and estado[self.cell_row][self.cell_colum-1] == 0:
@@ -48,13 +49,33 @@ class CrossOut(probee.Acción):
             res = True
         return res
 
-    # Indica si, al borrar una celda, si aisla con huecos alguna otra
-    def check_isolate_cell(self, estado, cellRow, cellColum):
+    def is_corner(self, estado):
         res = False
-        aux = self.get_croos_around(estado, cellRow, cellColum)
-        if self.is_coner(estado, cellRow, cellColum) and aux == 2:
+        if self.cell_colum == 0 and self.cell_row == 0:
             res = True
-        elif self.is_lateral(estado, cellRow, cellColum) and aux == 3:
+        elif self.cell_colum == 0 and self.cell_row == len(estado)-1:
+            res = True
+        elif self.cell_colum == len(estado[0])-1 and self.cell_row == 0:
+            res = True
+        elif self.cell_colum == len(estado[0])-1 and self.cell_row == len(estado) - 1:
+            res = True
+        return res
+
+    def is_lateral(self, estado):
+        res = False
+        if self.cell_colum == 0 or self.cell_colum == (len(estado[0]) - 1):
+            res = True
+        elif self.cell_row == 0 or self.cell_row == (len(estado) - 1):
+            res = True
+        return res
+
+    # Indica si, al borrar una celda, si aisla con huecos alguna otra
+    def check_isolate_cell(self, estado):
+        res = False
+        aux = self.get_croos_around(estado, self.cell_row, self.cell_colum)
+        if self.is_corner(estado) and aux > 0:
+            res = True
+        elif self.is_lateral(estado) and aux > 0:
             res = True
         elif aux == 4:
             res = True
@@ -90,17 +111,54 @@ class CrossOut(probee.Acción):
         return not self.is_cross(estado) \
                and self.exist_in_colum(estado) \
                and self.exist_in_row(estado) \
-               and not self.exist_black_cell_around(estado)
+               and not self.check_isolate_cell(estado)
+
+    def es_estado_final(self, estado):
+        res = False
+        for i in range(len(estado)):
+            for j in range(len(estado[0])):
+
+        return res
 
 
 if __name__ == '__main__':
-    estado1 = [[1,1,1,0],[1,1,0,1],[1,1,1,0],[1,1,1,1]]
+    estado1 = [[1,1,3,1],[5,9,0,6],[7,8,2,6],[1,4,8,1]]
     print(estado1[0])
     print(estado1[1])
     print(estado1[2])
     print(estado1[3])
-    pom = CrossOut(0,2)
-    print(pom.get_croos_around(estado1, 1, 3))
+    pom = CrossOut(0,0)
+
+    print("Celda:")
+    print(pom)
+    print(estado1[pom.cell_row][pom.cell_colum])
+    print()
+
+    # Indica si la celda ya está tachada
+    print("Celda tachada:  ")
+    print(pom.is_cross(estado1))
+    print()
+
+    # Indica si existe este número en esa fila
+    print("Existe ese número en esa fila:")
+    print(pom.exist_in_row(estado1))
+    print()
+
+    # Indica si existe este número en esa columna
+    print("Existe ese número en esa columna:")
+    print(pom.exist_in_colum(estado1))
+    print()
+
+
+    # ¿Dos huecos al borrar?
+    print("¿Dos huecos al borrar?")
+    #print(pom.check_isolate_cell(estado1))
+    print(pom.check_isolate_cell(estado1))
+    print()
+
+    # ¿Es aplicable?
+    print("¿Es aplicable?")
+    print(pom.es_aplicable(estado1))
 
 
 
