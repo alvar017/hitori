@@ -10,6 +10,7 @@ class hitori(probee.ProblemaEspacioEstados):
     def __init__(self, estado):
         super().__init__(estado)
         self.estado = estado
+        self.acciones = self.aplicables()
         estado_traspuesta = [[self.estado[j][i] for j in range(len(self.estado))] for i in range(len(self.estado[0]))]
         self.estado_traspuesta = estado_traspuesta
         print("Normal")
@@ -24,6 +25,12 @@ class hitori(probee.ProblemaEspacioEstados):
         print(self.estado_traspuesta[2])
         print(self.estado_traspuesta[3])
         print("Traspuesta")
+        print("Acciones")
+        for i in range(len(self.acciones)):
+            print("UN ESTADO INICIO")
+            print(self.acciones[i])
+            print("UN ESTADO FIN")
+        print("Acciones")
 
     def es_estado_final(self):
         filas = True
@@ -41,6 +48,18 @@ class hitori(probee.ProblemaEspacioEstados):
                filas = False
                break
         return filas & columnas
+
+    def aplicables(self):
+        acciones = []
+        x = 0
+        for i in range(len(self.estado)):
+            for j in range(len(self.estado[0])):
+                if (self.estado[i][j] != 0):
+                    copy_estado = copy.deepcopy(self.estado)
+                    copy_estado[i][j] = 0
+                    acciones = acciones.__add__(copy_estado)
+                    x = x + 1
+        return acciones
 
 if __name__ == '__main__':
     estado = [[1, 2, 3, 4], [7, 1, 8, 9], [2, 5, 6, 7], [3, 0, 5, 2]]
