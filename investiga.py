@@ -112,6 +112,23 @@ class CrossOut(probee.Acción):
                and (self.exist_in_colum(estado) or self.exist_in_row(estado)) \
                and not self.check_isolate_cell(estado)
 
+    def aplicar(self, estado):
+        nuevo_estado = copy.deepcopy(estado)
+        nuevo_estado[self.cell_row][self.cell_colum] = 0
+        return nuevo_estado
+
+    def aplicables(self, estado):
+        acciones = []
+        i = 0
+        for i in range(len(estado[self.cell_row])):
+            for j in range(len(estado)):
+                copy_estado = copy.deepcopy(estado)
+                if (not self.is_cross()):
+                    copy_estado[i][j] = 0
+                    acciones[i] = copy_estado
+                    i = i + 1
+
+
 
 if __name__ == '__main__':
     estado1 = [[1,7,3,4],[5,9,0,6],[7,8,2,6],[2,4,8,1]]
