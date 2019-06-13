@@ -31,13 +31,19 @@ class hitori(probee.ProblemaEspacioEstados):
         for i in range(len(self.estado)):
             to_check_row = list(filter(lambda x: x!=0, self.estado[i]))
             to_check_row_distinct = list(set(to_check_row))
-            if(len(to_check_row) != len(to_check_row_distinct)):
+            if len(to_check_row) != len(to_check_row_distinct):
+               filas = False
+               break
+        for i in range(len(self.estado_traspuesta)):
+            to_check_colum = list(filter(lambda x: x!=0, self.estado_traspuesta[i]))
+            to_check_colum_distinct = list(set(to_check_colum))
+            if len(to_check_colum) != len(to_check_colum_distinct):
                filas = False
                break
         return filas & columnas
 
 if __name__ == '__main__':
-    estado = [[1, 2, 3, 4], [1, 2, 3, 4], [2, 5, 6, 7], [3, 0, 6, 2]]
+    estado = [[1, 2, 3, 4], [7, 1, 8, 9], [2, 5, 6, 7], [3, 0, 5, 2]]
     pom = hitori(estado)
     print(pom.es_estado_final())
 
