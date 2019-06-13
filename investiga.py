@@ -109,20 +109,12 @@ class CrossOut(probee.Acción):
 
     def es_aplicable(self, estado):
         return not self.is_cross(estado) \
-               and self.exist_in_colum(estado) \
-               and self.exist_in_row(estado) \
+               and (self.exist_in_colum(estado) or self.exist_in_row(estado)) \
                and not self.check_isolate_cell(estado)
-
-    def es_estado_final(self, estado):
-        res = False
-        for i in range(len(estado)):
-            for j in range(len(estado[0])):
-
-        return res
 
 
 if __name__ == '__main__':
-    estado1 = [[1,1,3,1],[5,9,0,6],[7,8,2,6],[1,4,8,1]]
+    estado1 = [[1,7,3,4],[5,9,0,6],[7,8,2,6],[2,4,8,1]]
     print(estado1[0])
     print(estado1[1])
     print(estado1[2])
