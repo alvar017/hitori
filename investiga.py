@@ -132,46 +132,6 @@ class CrossOut(probee.Acción):
         return nuevo_estado
 
 
-if __name__ == '__main__':
-    estado1 = [[1,0,3,4],[5,9,0,6],[7,8,2,6],[2,4,8,1]]
-    print(estado1[0])
-    print(estado1[1])
-    print(estado1[2])
-    print(estado1[3])
-    pom = CrossOut(0,0)
-
-    print("Celda:")
-    print(pom)
-    print(estado1[pom.cell_row][pom.cell_colum])
-    print()
-
-    # Indica si la celda ya está tachada
-    print("Celda tachada:  ")
-    print(pom.is_cross(estado1))
-    print()
-
-    # Indica si existe este número en esa fila
-    print("Existe ese número en esa fila:")
-    print(pom.exist_in_row(estado1))
-    print()
-
-    # Indica si existe este número en esa columna
-    print("Existe ese número en esa columna:")
-    print(pom.exist_in_colum(estado1))
-    print()
-
-
-    # ¿Dos huecos al borrar?
-    print("¿Dos huecos al borrar?")
-    #print(pom.check_isolate_cell(estado1))
-    print(pom.check_black_cell_around(estado1))
-    print()
-
-    # ¿Es aplicable?
-    print("¿Es aplicable?")
-    print(pom.es_aplicable(estado1))
-
-
 
 
 

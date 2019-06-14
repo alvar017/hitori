@@ -16,7 +16,7 @@ class hitori(probee.ProblemaEspacioEstados):
         super().__init__(acciones, self.estado_inicial)
 
 if __name__ == '__main__':
-    estado = [[3,4,5,5,1,3],[5,6,2,3,2,1],[5,3,1,4,5,4],[1,4,3,4,2,2],[3,1,6,1,4,5],[1,2,1,5,3,4]]
+    estado = [[4,4,1,3,6,1],[1,2,3,5,4,5],[4,5,2,1,2,3],[5,5,4,6,2,4],[5,1,6,5,3,5],[3,1,4,2,1,5]]
     pom = hitori(estado)
     hitori_resolver = probee.ProblemaEspacioEstados(pom.acciones, pom.estado_inicial)
 
@@ -32,7 +32,7 @@ if __name__ == '__main__':
 
     # Búsqueda óptima
 
-#    b_óptima = busqee.BúsquedaÓptima()
+#    b_óptima = busqee.BúsquedaÓptima(detallado=True)
 #    print(b_óptima.buscar(hitori_resolver))
 
     # Búsqueda A*
@@ -45,7 +45,7 @@ if __name__ == '__main__':
             to_check_row = list(filter(lambda x: x != 0, estado[i]))
             for j in range(len(estado[0])):
                 if estado[i][j] == 0:
-                    zeros = zeros + 1
+                    zeros = zeros + 25
             row = row - 100 * len(list(set(to_check_row)))
         return row - 10000 * zeros
 
