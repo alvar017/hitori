@@ -11,34 +11,12 @@ class hitori(probee.ProblemaEspacioEstados):
 
         self.estado = estado
         acciones = self.aplicables()
-        estado_inicial = self.estado
-
-        print("Estado inicial")
-        print(estado_inicial)
-        print("Estado inicial")
+        self.estado_inicial = self.estado
 
         estado_traspuesta = [[self.estado[j][i] for j in range(len(self.estado))] for i in range(len(self.estado[0]))]
         self.estado_traspuesta = estado_traspuesta
 
-        print("Normal")
-        print(estado[0])
-        print(estado[1])
-        print(estado[2])
-        print("Normal")
-        print("Traspuesta")
-        print(self.estado_traspuesta[0])
-        print(self.estado_traspuesta[1])
-        print(self.estado_traspuesta[2])
-        print("Traspuesta")
-        print("Acciones")
-
-        for i in range(len(acciones)):
-            print("UN ESTADO INICIO")
-            print(acciones[i])
-            print("UN ESTADO FIN")
-        print("Acciones")
-
-        super().__init__(acciones, estado_inicial)
+        super().__init__(acciones, self.estado_inicial)
 
     def es_estado_final(self):
         filas = True
@@ -70,10 +48,13 @@ class hitori(probee.ProblemaEspacioEstados):
         return acciones
 
 if __name__ == '__main__':
-    estado = [[1,2,1],[2,2,1],[3,1,2]]
+    estado = [[0,2,0],[4,0,6],[0,8,0]]
     pom = hitori(estado)
 
     b_anchura = busqee.BúsquedaEnAnchura(detallado=True)
-    b_anchura.buscar(hitori)
+    acciones = [investiga.CrossOut(i, j) for i in range(0, 2) for j in range(0, 2) if i != j]
+    hitori_resolver = probee.ProblemaEspacioEstados(acciones, pom.estado_inicial, None)
+    print(b_anchura.buscar(hitori_resolver))
+    print(hitori_resolver.es_estado_final(estado))
 
 
