@@ -31,15 +31,29 @@ class Acción:
 
 
 class ProblemaEspacioEstados:
-    def __init__(self, acciones, estado_inicial=None, estados_finales=None):
+    def __init__(self, acciones, estado_inicial=None):
         if not isinstance(acciones, list):
             raise TypeError('Debe proporcionarse una lista de acciones')
         self.acciones = acciones
         self.estado_inicial = estado_inicial
-        self.estados_finales = estados_finales
 
     def es_estado_final(self, estado):
-        return estado in self.estados_finales
+        estado_traspuesta = [[estado[j][i] for j in range(len(estado))] for i in range(len(estado[0]))]
+        filas = True
+        columnas = True
+        for i in range(len(estado)):
+            to_check_row = list(filter(lambda x: x!=0, estado[i]))
+            to_check_row_distinct = list(set(to_check_row))
+            if len(to_check_row) != len(to_check_row_distinct):
+               filas = False
+               break
+        for i in range(len(estado_traspuesta)):
+            to_check_colum = list(filter(lambda x: x != 0, estado_traspuesta[i]))
+            to_check_colum_distinct = list(set(to_check_colum))
+            if len(to_check_colum) != len(to_check_colum_distinct):
+               filas = False
+               break
+        return filas & columnas
 
     def acciones_aplicables(self, estado):
         return (acción

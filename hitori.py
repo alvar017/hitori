@@ -48,13 +48,12 @@ class hitori(probee.ProblemaEspacioEstados):
         return acciones
 
 if __name__ == '__main__':
-    estado = [[0,2,0],[4,0,6],[0,8,0]]
+    estado = [[4,2,0],[4,0,6],[0,8,0]]
     pom = hitori(estado)
 
     b_anchura = busqee.BúsquedaEnAnchura(detallado=True)
     acciones = [investiga.CrossOut(i, j) for i in range(0, 2) for j in range(0, 2) if i != j]
-    hitori_resolver = probee.ProblemaEspacioEstados(acciones, pom.estado_inicial, None)
+    hitori_resolver = probee.ProblemaEspacioEstados(acciones, pom.estado_inicial)
     print(b_anchura.buscar(hitori_resolver))
-    print(hitori_resolver.es_estado_final(estado))
 
 
