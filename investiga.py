@@ -4,21 +4,21 @@ import búsqueda_espacio_estados as busqee
 
 import copy
 
-estado1 = [{1,2,1},{2,2,1},{1,1,2}]
 
 class CrossOut(probee.Acción):
-    def __init__(self,i,j):
-        nombre= 'La fila {} y columna {}'.format(i,j)
+
+    def __init__(self, i, j):
+        nombre = 'La fila {} y columna {}'.format(i, j)
         super().__init__(nombre)
         self.cell_row = i
         self.cell_colum = j
 
     # Indica si la casilla ya esta tachada
-    def is_cross(self,estado):
+    def is_cross(self, estado):
         return not estado[self.cell_row][self.cell_colum]
 
     # Indica si existe el mismo numero en esa fila
-    def exist_in_row(self,estado):
+    def exist_in_row(self, estado):
         return bool(estado[self.cell_row].count(estado[self.cell_row][self.cell_colum]) > 1)
 
     # Indica si existe el mismo numero en esa columna
