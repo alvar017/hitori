@@ -16,7 +16,7 @@ class hitori(probee.ProblemaEspacioEstados):
         super().__init__(acciones, self.estado_inicial)
 
 if __name__ == '__main__':
-    estado = [[3,1,3,2,6,4],[1,2,6,3,3,5],[3,1,1,5,4,1],[3,4,2,6,3,3],[2,6,3,1,5,4],[2,5,3,1,2,4]]
+    estado = [[3,4,5,5,1,3],[5,6,2,3,2,1],[5,3,1,4,5,4],[1,4,3,4,2,2],[3,1,6,1,4,5],[1,2,1,5,3,4]]
     pom = hitori(estado)
     hitori_resolver = probee.ProblemaEspacioEstados(pom.acciones, pom.estado_inicial)
 
@@ -39,7 +39,15 @@ if __name__ == '__main__':
 
     def h(nodo):
         estado = nodo.estado
-        return 1 + 1
+        row = 100000000000000
+        zeros = 0
+        for i in range(len(estado)):
+            to_check_row = list(filter(lambda x: x != 0, estado[i]))
+            for j in range(len(estado[0])):
+                if estado[i][j] == 0:
+                    zeros = zeros + 1
+            row = row - 100 * len(list(set(to_check_row)))
+        return row - 10000 * zeros
 
     b_a_estrella = busqee.BúsquedaAEstrella(h)
     print(b_a_estrella.buscar(hitori_resolver))

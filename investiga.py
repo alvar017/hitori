@@ -1,7 +1,5 @@
 import problema_espacio_estados as probee
 
-import búsqueda_espacio_estados as busqee
-
 import copy
 
 
@@ -23,14 +21,18 @@ class CrossOut(probee.Acción):
 
     # Indica si existe el mismo numero en esa columna
     def exist_in_colum(self, estado):
-        res = 0
-        for i in range(len(estado)):
-            if estado[i][self.cell_colum] == estado[self.cell_row][self.cell_colum]:
-                res = res + 1
-        aux = False
-        if res > 1:
-            aux = True
-        return aux
+        # Versión 1
+#        res = 0
+#        for i in range(len(estado)):
+#            if estado[i][self.cell_colum] == estado[self.cell_row][self.cell_colum]:
+#                res = res + 1
+#        aux = False
+#        if res > 1:
+#            aux = True
+#        return aux
+        # Version 2
+        estado_traspuesta = [[estado[j][i] for j in range(len(estado))] for i in range(len(estado[0]))]
+        return bool(estado_traspuesta[self.cell_row].count(estado_traspuesta[self.cell_row][self.cell_colum]) > 1)
 
     # Indica si existe ya una casilla tachada en los alrededores
     def exist_black_cell_around(self, estado):
@@ -77,7 +79,7 @@ class CrossOut(probee.Acción):
             res = True
         elif self.is_lateral(estado) and aux > 0:
             res = True
-        elif aux == 4:
+        elif aux > 0:
             res = True
         return res
 
@@ -107,10 +109,22 @@ class CrossOut(probee.Acción):
                     copy_estado[i][j] = 0
         return copy_estado
 
+    def check_black_cell_around(self, estado):
+        valid_colum = list(filter(lambda x: x >= 0 and x < len(estado), [self.cell_row - 1, self.cell_row, 1 + self.cell_row]))
+        valid_row = list(filter(lambda x: x >= 0 and x < len(estado), [self.cell_colum - 1, self.cell_colum, self.cell_colum + 1]))
+        more_one_zero_row = len(list(filter(lambda x: estado[self.cell_row][x] == 0, valid_row))) > 0
+        if not more_one_zero_row:
+            return len(list(filter(lambda x: estado[x][self.cell_colum] == 0, valid_colum))) > 0
+        else:
+            return more_one_zero_row
+
     def es_aplicable(self, estado):
         return not self.is_cross(estado) \
                and (self.exist_in_colum(estado) or self.exist_in_row(estado)) \
                and not self.exist_black_cell_around(estado)
+#               and not self.check_isolate_cell(estado)
+#               and not self.check_black_cell_around(estado)
+#               Estos dos últimos métodos también funcionan pero van un poco más lento
 
     def aplicar(self, estado):
         nuevo_estado = copy.deepcopy(estado)
@@ -119,7 +133,7 @@ class CrossOut(probee.Acción):
 
 
 if __name__ == '__main__':
-    estado1 = [[1,7,3,4],[5,9,0,6],[7,8,2,6],[2,4,8,1]]
+    estado1 = [[1,0,3,4],[5,9,0,6],[7,8,2,6],[2,4,8,1]]
     print(estado1[0])
     print(estado1[1])
     print(estado1[2])
@@ -150,7 +164,7 @@ if __name__ == '__main__':
     # ¿Dos huecos al borrar?
     print("¿Dos huecos al borrar?")
     #print(pom.check_isolate_cell(estado1))
-    print(pom.check_isolate_cell(estado1))
+    print(pom.check_black_cell_around(estado1))
     print()
 
     # ¿Es aplicable?
