@@ -110,7 +110,7 @@ class CrossOut(probee.Acción):
     def es_aplicable(self, estado):
         return not self.is_cross(estado) \
                and (self.exist_in_colum(estado) or self.exist_in_row(estado)) \
-               and not self.check_isolate_cell(estado)
+               and not self.exist_black_cell_around(estado)
 
     def aplicar(self, estado):
         nuevo_estado = copy.deepcopy(estado)
