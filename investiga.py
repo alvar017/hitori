@@ -22,17 +22,17 @@ class CrossOut(probee.Acción):
     # Indica si existe el mismo numero en esa columna
     def exist_in_colum(self, estado):
         # Versión 1
-#        res = 0
-#        for i in range(len(estado)):
-#            if estado[i][self.cell_colum] == estado[self.cell_row][self.cell_colum]:
-#                res = res + 1
-#        aux = False
-#        if res > 1:
-#            aux = True
-#        return aux
+        res = 0
+        for i in range(len(estado)):
+            if estado[i][self.cell_colum] == estado[self.cell_row][self.cell_colum]:
+                res = res + 1
+        aux = False
+        if res > 1:
+            aux = True
+        return aux
         # Version 2
-        estado_traspuesta = [[estado[j][i] for j in range(len(estado))] for i in range(len(estado[0]))]
-        return bool(estado_traspuesta[self.cell_row].count(estado_traspuesta[self.cell_row][self.cell_colum]) > 1)
+#        estado_traspuesta = [[estado[j][i] for j in range(len(estado))] for i in range(len(estado[0]))]
+#        return bool(estado_traspuesta[self.cell_row].count(estado_traspuesta[self.cell_row][self.cell_colum]) > 1)
 
     # Indica si existe ya una casilla tachada en los alrededores
     def exist_black_cell_around(self, estado):
