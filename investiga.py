@@ -75,11 +75,11 @@ class CrossOut(probee.Acción):
     def check_isolate_cell(self, estado):
         res = False
         aux = self.get_croos_around(estado, self.cell_row, self.cell_colum)
-        if self.is_corner(estado) and aux > 0:
+        if self.is_corner(estado) and aux >= 2:
             res = True
-        elif self.is_lateral(estado) and aux > 0:
+        elif self.is_lateral(estado) and aux >= 3:
             res = True
-        elif aux > 0:
+        elif aux >= 4:
             res = True
         return res
 
@@ -118,11 +118,27 @@ class CrossOut(probee.Acción):
         else:
             return more_one_zero_row
 
+        # Indica si, al borrar una celda, si aisla con huecos alguna otra
+
+    def squareBetweenAPair(self,estado):
+            res = False
+            row = self.cell_row
+            colum = self.cell_colum
+            if(len(estado[0]) - colum >= 2 and colum >= 1):
+                if(estado[row][colum - 1] == estado[row][colum + 1] and estado[row][colum] == 0):
+                    res = True
+            if (len(estado) - row >= 2 and row >= 1):
+                if (estado[row + 1][colum] == estado[row - 1][colum] and estado[row][colum] == 0):
+                    res = True
+            return res
+
     def es_aplicable(self, estado):
         return not self.is_cross(estado) \
                and (self.exist_in_colum(estado) or self.exist_in_row(estado)) \
-               and not self.exist_black_cell_around(estado)
-#               and not self.check_isolate_cell(estado)
+               and not self.exist_black_cell_around(estado) \
+               and not self.check_isolate_cell(estado) \
+               and not self.squareBetweenAPair(estado)
+
 #               and not self.check_black_cell_around(estado)
 #               Estos dos últimos métodos también funcionan pero van un poco más lento
 
