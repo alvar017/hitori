@@ -6,67 +6,36 @@ import investiga as investiga
 
 from time import time
 
+import auxiliar as auxiliar
+
 import copy
 
 class hitori(probee.ProblemaEspacioEstados):
-    def __init__(self, estado):
+    def __init__(self, status):
 
-        self.estado = estado
-        acciones = [investiga.CrossOut(i, j) for i in range(0, len(estado)) for j in range(0, len(estado[0]))]
-        self.estado_inicial = self.estado
-        self.estado_traspuesta = [[self.estado[j][i] for j in range(len(self.estado))] for i in range(len(self.estado[0]))]
+        self.status = status
+        acciones = [investiga.CrossOut(i, j) for i in range(0, len(status)) for j in range(0, len(status[0]))]
+        self.estado_inicial = self.status
+        self.estado_traspuesta = [[self.status[j][i] for j in range(len(self.status))] for i in range(len(self.status[0]))]
 
         super().__init__(acciones, self.estado_inicial)
 
+
 if __name__ == '__main__':
-    tiempo_inicial = time()
 
-    estado = [[1,8,2,4,3,9,4,1,5],[6,5,5,1,1,4,9,3,3],[8,4,6,9,5,3,2,6,7],[4,8,3,8,7,8,8,2,9],[1,6,4,2,3,6,5,9,1],[9,5,8,3,5,2,7,6,1],[2,5,3,1,6,4,4,2,8],[5,4,4,2,9,3,7,7,6],[7,9,1,5,1,6,3,8,8]]
+    start_time = time()
 
-    def adjacentTriplet(estado):
-        newEstado = estado
-        for j in range(len(newEstado[0])):
-            for i in range(len(newEstado)):
-               if(len(estado) - i >= 3):
-                     if newEstado[i][j] == newEstado[i+1][j] == newEstado[i+2][j]:
-                        print("Entro en el if")
-                        newEstado[i][j] = 0
-                        newEstado[i+2][j] = 0
-        for i in range(len(newEstado)):
-            for j in range(len(newEstado[0])):
-                if (len(estado[0]) - j >= 3):
-                    if newEstado[i][j] == newEstado[i][j+1] == newEstado[i][j+2]:
-                        print("Entro en el if")
-                        newEstado[i][j] = 0
-                        newEstado[i][j+2] = 0
-        return newEstado
+    status = [[3,4,5,5,1,3],[5,6,2,3,2,1],[5,3,1,4,5,4],[1,4,3,4,2,2],[3,1,6,1,4,5],[1,2,1,5,3,4]]
 
-    estadoChange = adjacentTriplet(estado)
+    statusChange = auxiliar.Auxiliar.adjacent_triplet(status)
 
-    print(estadoChange)
+    print(statusChange)
 
-    pom = hitori(estadoChange)
+    pom = hitori(statusChange)
     hitori_resolver = probee.ProblemaEspacioEstados(pom.acciones, pom.estado_inicial)
 
     print(len(pom.acciones))
     print(pom.acciones)
-
-
-    def squareBetweenAPair(estado):
-        res = False
-        for j in range(len(estado[0])):
-            for i in range(len(estado)):
-                if (len(estado) - i >= 2):
-                    if estado[i - 1][j] == estado[i + 1][j] and estado[i][j] == 0:
-                        res = True
-                        break
-        for i in range(len(estado)):
-            for j in range(len(estado[0])):
-                if (len(estado[0]) - j >= 2):
-                    if estado[i][j - 1] == estado[i][j + 1] and estado[i][j] == 0:
-                        res = True
-                        break
-        return res
 
     # Búsqueda en anchura
 
@@ -89,24 +58,24 @@ if __name__ == '__main__':
         estado = nodo.estado
         row = 100000000000000
         zeros = 0
-        square = squareBetweenAPair(estado)
-        if (square == False):
-            zeros = zeros + 1000
         for i in range(len(estado)):
             to_check_row = list(filter(lambda x: x != 0, estado[i]))
             for j in range(len(estado[0])):
                 if estado[i][j] == 0:
-                    zeros = zeros + 25
-            row = row - 100 * len(list(set(to_check_row)))
+                    zeros = zeros + 10
+            row = row - 10000 * len(set(to_check_row))
+        square = auxiliar.Auxiliar.square_between_a_pair(estado)
+        if square:
+            zeros = 0
         return row - 10000 * zeros
 
     b_a_estrella = busqee.BúsquedaAEstrella(h)
     print(b_a_estrella.buscar(hitori_resolver))
 
-tiempo_final = time()
+finish_time = time()
 
-tiempo_ejecucion = tiempo_final - tiempo_inicial
+execute_time = finish_time - start_time
 
 print("La ejecución ha tardado: ")
-print(tiempo_ejecucion)
+print(execute_time)
 

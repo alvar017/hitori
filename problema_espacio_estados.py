@@ -38,22 +38,28 @@ class ProblemaEspacioEstados:
         self.estado_inicial = estado_inicial
 
     def es_estado_final(self, estado):
-        estado_traspuesta = [[estado[j][i] for j in range(len(estado))] for i in range(len(estado[0]))]
-        filas = True
-        columnas = True
-        for i in range(len(estado)):
-            to_check_row = list(filter(lambda x: x!=0, estado[i]))
-            to_check_row_distinct = list(set(to_check_row))
-            if len(to_check_row) != len(to_check_row_distinct):
-               filas = False
-               break
-        for i in range(len(estado_traspuesta)):
-            to_check_colum = list(filter(lambda x: x != 0, estado_traspuesta[i]))
-            to_check_colum_distinct = list(set(to_check_colum))
-            if len(to_check_colum) != len(to_check_colum_distinct):
-               filas = False
-               break
-        return filas & columnas
+        accion = self.acciones[len(self.acciones)-1]
+        check = (len(estado) - 1) == accion.cell_row and (len(estado[0]) - 1) == accion.cell_colum
+        if check:
+            filas = True
+            columnas = True
+            for i in range(len(estado)):
+                to_check_row = list(filter(lambda x: x != 0, estado[i]))
+                to_check_row_distinct = list(set(to_check_row))
+                if len(to_check_row) != len(to_check_row_distinct):
+                    filas = False
+                    break
+                columnasAux = []
+                for j in range(len(estado[0])):
+                    columnasAux.append(estado[i][j])
+                to_check_colum = list(filter(lambda x: x != 0, columnasAux))
+                to_check_colum_distinct = list(set(to_check_colum))
+                if len(to_check_colum) != len(to_check_colum_distinct):
+                    columnas = False
+                    break
+            return filas & columnas
+        else:
+            return False
 
     def acciones_aplicables(self, estado):
         return (acción

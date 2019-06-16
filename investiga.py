@@ -110,8 +110,10 @@ class CrossOut(probee.Acción):
         return copy_estado
 
     def check_black_cell_around(self, estado):
-        valid_colum = list(filter(lambda x: x >= 0 and x < len(estado), [self.cell_row - 1, self.cell_row, 1 + self.cell_row]))
-        valid_row = list(filter(lambda x: x >= 0 and x < len(estado), [self.cell_colum - 1, self.cell_colum, self.cell_colum + 1]))
+        r = self.cell_row
+        c = self.cell_colum
+        valid_colum = list(filter(lambda x: 0 <= x < len(estado), [r - 1, r, r + 1]))
+        valid_row = list(filter(lambda x: 0 <= x < len(estado), [c - 1, c, c + 1]))
         more_one_zero_row = len(list(filter(lambda x: estado[self.cell_row][x] == 0, valid_row))) > 0
         if not more_one_zero_row:
             return len(list(filter(lambda x: estado[x][self.cell_colum] == 0, valid_colum))) > 0
@@ -148,7 +150,7 @@ class CrossOut(probee.Acción):
         return nuevo_estado
 
     def coste_de_aplicar(self, estado):
-        return self.cell_row * -1000 + self.cell_colum * -100
+        return self.cell_row * - 10000 + self.cell_colum * - 10
 
 
 
