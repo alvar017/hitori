@@ -147,6 +147,9 @@ class CrossOut(probee.Acción):
         nuevo_estado[self.cell_row][self.cell_colum] = 0
         return nuevo_estado
 
+    def coste_de_aplicar(self, estado):
+        return self.cell_row * -1000 + self.cell_colum * -100
+
 
 
 

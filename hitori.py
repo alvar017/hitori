@@ -41,29 +41,6 @@ if __name__ == '__main__':
                         newEstado[i][j+2] = 0
         return newEstado
 
-    def pairInduction(estado, estadoTraspuesta):
-        estado_copy = copy.deepcopy(estado)
-        for i in range(len(estado)):
-            for j in range(len(estado[0])):
-                aux = []
-                valid_colum_in_row = list(filter(lambda x: 0 <= x < len(estado[0]), [j, j + 2, j + 3]))
-                for f in valid_colum_in_row:
-                    aux.append(estado[i][f])
-                if aux.count(estado[i][j]) == 3 and estado[i][j] != 0:
-                    estado_copy[i][j] = 0
-        for i in range(len(estadoTraspuesta)):
-            for j in range(len(estadoTraspuesta[0])):
-                aux = []
-                valid_colum_in_row = list(filter(lambda x: 0 <= x < len(estadoTraspuesta[0]), [j, j + 2, j + 3]))
-                for f in valid_colum_in_row:
-                    aux.append(estadoTraspuesta[i][f])
-                if aux.count(estadoTraspuesta[i][j]) == 3 and estadoTraspuesta[i][j] != 0:
-                    estado_copy[i][j] = 0
-        return estado_copy
-
-    estado_traspuesta = [[estado[j][i] for j in range(len(estado))] for i in range(len(estado[0]))]
-    estado = pairInduction(estado, estado_traspuesta)
-
     estadoChange = adjacentTriplet(estado)
 
     print(estadoChange)
