@@ -10,6 +10,7 @@ import auxiliar as auxiliar
 
 import copy
 
+
 class hitori(probee.ProblemaEspacioEstados):
     def __init__(self, status):
 
@@ -25,7 +26,7 @@ if __name__ == '__main__':
 
     start_time = time()
 
-    status = [[3,4,5,5,1,3],[5,6,2,3,2,1],[5,3,1,4,5,4],[1,4,3,4,2,2],[3,1,6,1,4,5],[1,2,1,5,3,4]]
+    status = [[8,6,2,1,4,4,3,2,7],[2,4,8,9,8,6,5,2,5],[4,8,9,7,2,4,6,6,3],[6,8,5,3,7,9,8,7,4],[7,7,4,8,5,2,7,3,9],[2,9,7,5,8,3,7,5,1],[6,5,6,5,1,7,2,8,1],[9,1,7,7,3,4,2,5,8],[4,3,1,5,9,8,4,7,6]]
 
     statusChange = auxiliar.Auxiliar.adjacent_triplet(status)
 
@@ -59,11 +60,9 @@ if __name__ == '__main__':
         row = 100000000000000
         zeros = 0
         for i in range(len(estado)):
-            to_check_row = list(filter(lambda x: x != 0, estado[i]))
-            for j in range(len(estado[0])):
-                if estado[i][j] == 0:
-                    zeros = zeros + 10
-            row = row - 10000 * len(set(to_check_row))
+            to_check_row = list(estado[i])
+            zeros = zeros + 1 * to_check_row.count(0)
+            row = row + 10000 * (len(to_check_row) - len(set(to_check_row)))
         square = auxiliar.Auxiliar.square_between_a_pair(estado)
         if square:
             zeros = 0

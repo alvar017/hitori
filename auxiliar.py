@@ -1,3 +1,6 @@
+import copy
+
+
 class Auxiliar():
 
     def __init__(self, estado):
@@ -39,4 +42,28 @@ class Auxiliar():
                         break
         return res
 
-
+    def pair_induction(estado, estado_traspuesta):
+        estado_copy = copy.deepcopy(estado)
+        for i in range(len(estado)):
+            for j in range(len(estado[0])):
+                aux = []
+                valid_colum_in_row = list(filter(lambda x: 0 <= x < len(estado[0]), [j, j+1, j + 2, j + 3]))
+                for f in valid_colum_in_row:
+                    aux.append(estado[i][f])
+                if aux.count(estado[i][j]) == 3 and estado[i][j] != 0:
+                    if aux[0] == aux[1] == aux[3]:
+                      estado_copy[i][j+3] = 0
+                    if aux[0] == aux[2] == aux[3]:
+                        estado_copy[i][j] = 0
+        for i in range(len(estado_traspuesta)):
+            for j in range(len(estado_traspuesta[0])):
+                aux = []
+                valid_colum_in_row = list(filter(lambda x: 0 <= x < len(estado_traspuesta[0]), [j, j+1, j + 2, j + 3]))
+                for f in valid_colum_in_row:
+                    aux.append(estado_traspuesta[i][f])
+                if aux.count(estado_traspuesta[i][j]) == 3 and estado_traspuesta[i][j] != 0:
+                    if aux[0] == aux[1] == aux[3]:
+                        estado_copy[i + 3][j] = 0
+                    if aux[0] == aux[2] == aux[3]:
+                        estado_copy[i][j] = 0
+        return estado_copy
