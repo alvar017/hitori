@@ -14,10 +14,8 @@ import copy
 class hitori(probee.ProblemaEspacioEstados):
     def __init__(self, status):
 
-        self.status = status
         acciones = [investiga.CrossOut(i, j) for i in range(0, len(status)) for j in range(0, len(status[0]))]
-        self.estado_inicial = self.status
-        self.estado_traspuesta = [[self.status[j][i] for j in range(len(self.status))] for i in range(len(self.status[0]))]
+        self.estado_inicial = status
 
         super().__init__(acciones, self.estado_inicial)
 

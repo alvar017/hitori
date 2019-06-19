@@ -46,13 +46,12 @@ class ProblemaEspacioEstados:
             if len(to_check_row) != len(to_check_row_distinct):
                 filas = False
                 break
-            columnasAux = []
-            for j in range(len(estado[0])):
-                columnasAux.append(estado[i][j])
-            to_check_colum = list(filter(lambda x: x != 0, columnasAux))
-            to_check_colum_distinct = list(set(to_check_colum))
-            if len(to_check_colum) != len(to_check_colum_distinct):
-                columnas = False
+        estado_traspuesta = [[estado[j][i] for j in range(len(estado))] for i in range(len(estado[0]))]
+        for i in range(len(estado_traspuesta)):
+            to_check_row = list(filter(lambda x: x != 0, estado_traspuesta[i]))
+            to_check_row_distinct = list(set(to_check_row))
+            if len(to_check_row) != len(to_check_row_distinct):
+                filas = False
                 break
         res = filas & columnas
         if res:
