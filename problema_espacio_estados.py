@@ -54,7 +54,13 @@ class ProblemaEspacioEstados:
             if len(to_check_colum) != len(to_check_colum_distinct):
                 columnas = False
                 break
-        return filas & columnas
+        res = filas & columnas
+        if res:
+            print("Solución")
+            for i in range(len(estado)):
+                print(estado[i])
+            print("Solución")
+        return res
 
     def acciones_aplicables(self, estado):
         return (acción
