@@ -51,37 +51,66 @@ class CrossOut(probee.Acción):
             res = True
         return res
 
-    def is_corner(self, estado):
+    def is_corner(self, estado , row, colum):
         res = False
-        if self.cell_colum == 0 and self.cell_row == 0:
+        if colum == 0 and row == 0:
             res = True
-        elif self.cell_colum == 0 and self.cell_row == len(estado)-1:
+        elif colum == 0 and row == len(estado)-1:
             res = True
-        elif self.cell_colum == len(estado[0])-1 and self.cell_row == 0:
+        elif colum == len(estado[0])-1 and row == 0:
             res = True
-        elif self.cell_colum == len(estado[0])-1 and self.cell_row == len(estado) - 1:
+        elif colum == len(estado[0])-1 and row == len(estado) - 1:
             res = True
         return res
 
-    def is_lateral(self, estado):
+    def is_lateral(self, estado, row, colum):
         res = False
-        if self.cell_colum == 0 or self.cell_colum == (len(estado[0]) - 1):
+        if colum == 0 or colum == (len(estado[0]) - 1):
             res = True
-        elif self.cell_row == 0 or self.cell_row == (len(estado) - 1):
+        elif row == 0 or row == (len(estado) - 1):
             res = True
         return res
 
     # Indica si, al borrar una celda, si aisla con huecos alguna otra
     def check_isolate_cell(self, estado):
-        res = False
-        aux = self.get_croos_around(estado, self.cell_row, self.cell_colum)
-        if self.is_corner(estado) and aux >= 2:
-            res = True
-        elif self.is_lateral(estado) and aux >= 3:
-            res = True
-        elif aux >= 4:
-            res = True
-        return res
+        res = 0
+        auxSup = self.get_croos_around(estado,self.cell_row-1,self.cell_colum)
+        if self.is_corner(estado,self.cell_row-1,self.cell_colum) and auxSup >= 1:
+            res = res + 1
+        elif self.is_lateral(estado,self.cell_row-1,self.cell_colum) and auxSup >= 2:
+            res = res + 1
+        elif auxSup >= 3:
+            res = res + 1
+
+        auxInf = self.get_croos_around(estado, self.cell_row + 1, self.cell_colum)
+        if self.is_corner(estado, self.cell_row + 1, self.cell_colum) and auxInf >= 1:
+            res = res + 1
+        elif self.is_lateral(estado, self.cell_row + 1, self.cell_colum) and auxInf >= 2:
+            res = res + 1
+        elif auxInf >= 3:
+            res = res + 1
+
+        auxRight = self.get_croos_around(estado, self.cell_row, self.cell_colum + 1)
+        if self.is_corner(estado, self.cell_row, self.cell_colum + 1) and auxRight >= 1:
+            res = res + 1
+        elif self.is_lateral(estado, self.cell_row, self.cell_colum + 1) and auxRight >= 2:
+            res = res + 1
+        elif auxRight >= 3:
+            res = res + 1
+
+        auxLeft = self.get_croos_around(estado, self.cell_row, self.cell_colum - 1)
+        if self.is_corner(estado, self.cell_row, self.cell_colum - 1) and auxLeft >= 1:
+            res = res + 1
+        elif self.is_lateral(estado, self.cell_row, self.cell_colum - 1) and auxLeft >= 2:
+            res = res + 1
+        elif auxLeft >= 3:
+            res = res + 1
+
+        result = False
+
+        if res > 0:
+            result = True
+        return result
 
     # Indica si el numero de huecos que rodea a una casilla
     def get_croos_around(self, estado, cellRow, cellColum):

@@ -24,11 +24,19 @@ if __name__ == '__main__':
 
     start_time = time()
 
-    status = [[8,6,2,1,4,4,3,2,7],[2,4,8,9,8,6,5,2,5],[4,8,9,7,2,4,6,6,3],[6,8,5,3,7,9,8,7,4],[7,7,4,8,5,2,7,3,9],[2,9,7,5,8,3,7,5,1],[6,5,6,5,1,7,2,8,1],[9,1,7,7,3,4,2,5,8],[4,3,1,5,9,8,4,7,6]]
+    status = [[3,1,3,2,6,4],[1,2,6,3,3,5],[3,1,1,5,4,1],[3,4,2,6,3,3],[2,6,3,1,5,4],[2,5,3,1,2,4]]
 
     statusChange = auxiliar.Auxiliar.adjacent_triplet(status)
 
     print(statusChange)
+
+    statusChangeTras =  [[statusChange[j][i] for j in range(len(statusChange))] for i in range(len(statusChange[0]))]
+
+    print(statusChangeTras)
+
+    statuschange2 = auxiliar.Auxiliar.pair_induction(statusChange, statusChangeTras)
+
+    print(statuschange2)
 
     pom = hitori(statusChange)
     hitori_resolver = probee.ProblemaEspacioEstados(pom.acciones, pom.estado_inicial)
