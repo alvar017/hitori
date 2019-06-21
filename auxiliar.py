@@ -63,7 +63,7 @@ class Auxiliar():
                     aux.append(estado_traspuesta[i][f])
                 if aux.count(estado_traspuesta[i][j]) == 3 and estado_traspuesta[i][j] != 0:
                     if aux[0] == aux[1] == aux[3]:
-                        estado_copy[i + 3][j] = 0
+                        estado_copy[j + 3][i] = 0
                     if aux[0] == aux[2] == aux[3]:
-                        estado_copy[i][j] = 0
+                        estado_copy[j][i] = 0
         return estado_copy
