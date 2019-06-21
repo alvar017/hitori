@@ -147,28 +147,47 @@ class CrossOut(probee.Acción):
         if not more_one_zero_row:
             return len(list(filter(lambda x: estado[x][self.cell_colum] == 0, valid_colum))) > 0
         else:
-            return more_one_zero_row
+            return False
 
         # Indica si, al borrar una celda, si aisla con huecos alguna otra
 
-    def squareBetweenAPair(self,estado):
-            res = False
-            row = self.cell_row
-            colum = self.cell_colum
-            if(len(estado[0]) - colum >= 2 and colum >= 1):
-                if(estado[row][colum - 1] == estado[row][colum + 1] and estado[row][colum] == 0):
-                    res = True
-            if (len(estado) - row >= 2 and row >= 1):
-                if (estado[row + 1][colum] == estado[row - 1][colum] and estado[row][colum] == 0):
-                    res = True
-            return res
+    def square_between_a_pair(self,estado):
+        res = False
+        row = self.cell_row
+        colum = self.cell_colum
+        if len(estado[0]) - colum >= 2 and colum >= 1:
+            if estado[row][colum - 1] == estado[row][colum + 1] and estado[row][colum] == 0:
+                res = True
+        if len(estado) - row >= 2 and row >= 1:
+            if estado[row + 1][colum] == estado[row - 1][colum] and estado[row][colum] == 0:
+                res = True
+        return res
+
+    def check_isolate(self, estado):
+        res = ([[self.cell_row, self.cell_colum-1],
+                [self.cell_row+1, self.cell_colum],
+                [self.cell_row, self.cell_colum + 1],
+                [self.cell_row-1, self.cell_colum]])
+        cells = list(filter(lambda x: 0 <= x[0] <= len(estado) - 1 and 0 <= x[1] <= len(estado[0]) - 1, res))
+        for i in range(len(cells)):
+            row = cells[i][0]
+            colum = cells[i][1]
+            aux = [row, colum - 1], [row + 1, colum], [row, colum + 1], [row - 1, colum]
+            aux = list(filter(lambda x: 0 <= x[0] <= len(estado)-1 and 0 <= x[1] <= len(estado[0])-1, aux))
+            counter = len(aux) - 1
+            for j in range(len(aux)):
+                if estado[aux[j][0]][aux[j][1]] == 0:
+                    counter = counter - 1
+            if counter <= 0:
+                return True
+        return False
 
     def es_aplicable(self, estado):
         return not self.is_cross(estado) \
                and not self.exist_black_cell_around(estado) \
                and (self.exist_in_colum(estado) or self.exist_in_row(estado)) \
-               and not self.check_isolate_cell(estado) \
-               and not self.squareBetweenAPair(estado)
+               and not self.check_isolate(estado) \
+               and not self.square_between_a_pair(estado)
 
 #               and not self.check_black_cell_around(estado)
 #               Estos dos últimos métodos también funcionan pero van un poco más lento
