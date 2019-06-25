@@ -209,12 +209,19 @@ class CrossOut(probee.Acción):
         return nuevo_estado
 
     def coste_de_aplicar(self, estado):
-        row = 100000000000000
-        if(self.exist_in_colum(estado)):
-            row = row + 100
-        if (self.exist_in_row(estado)):
-            row = row + 100
-        return - (row - 10000)
+        coste = 0
+        number_row = estado[self.cell_row].count(estado[self.cell_row][self.cell_colum])
+
+        columna = []
+        for i in range(len(estado[0])):
+            columna.append(estado[i][self.cell_colum])
+        number_colum = columna.count(estado[self.cell_row][self.cell_colum])
+
+        if(number_colum > 1):
+            coste = coste - 10000 * number_colum
+        if (number_row > 1):
+            coste = coste - 10000 * number_row
+        return coste
 
 
 
