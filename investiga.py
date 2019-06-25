@@ -2,6 +2,10 @@ import problema_espacio_estados as probee
 
 import copy
 
+from scipy.ndimage import label
+
+import auxiliar as auxiliar
+
 
 class CrossOut(probee.Acción):
 
@@ -182,6 +186,13 @@ class CrossOut(probee.Acción):
                 return True
         return False
 
+    def check_isolate2(self, estado):
+        res = False
+        numeroComponentesConexas = label(estado)
+        if(numeroComponentesConexas[1] > 1):
+            res = True
+        return res
+
     def es_aplicable(self, estado):
         return not self.is_cross(estado) \
                and not self.exist_black_cell_around(estado) \
@@ -198,7 +209,12 @@ class CrossOut(probee.Acción):
         return nuevo_estado
 
     def coste_de_aplicar(self, estado):
-        return self.cell_row * - 10000 + self.cell_colum * - 10
+        row = 100000000000000
+        if(self.exist_in_colum(estado)):
+            row = row + 100
+        if (self.exist_in_row(estado)):
+            row = row + 100
+        return - (row - 10000)
 
 
 

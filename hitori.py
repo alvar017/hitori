@@ -8,6 +8,8 @@ from time import time
 
 import auxiliar as auxiliar
 
+from scipy.ndimage import label
+
 import copy
 
 
@@ -24,7 +26,7 @@ if __name__ == '__main__':
 
     start_time = time()
 
-    status = [[3,1,3,2,6,4],[1,2,6,3,3,5],[3,1,1,5,4,1],[3,4,2,6,3,3],[2,6,3,1,5,4],[2,5,3,1,2,4]]
+    status = [[5,1,6,4,9,8,2,4,3],[7,6,4,3,4,8,2,9,3],[3,8,1,2,6,3,7,5,4],[6,2,4,8,1,1,3,7,3],[2,6,7,8,8,5,9,4,6],[1,9,5,7,8,6,3,1,2],[9,7,7,1,5,4,8,2,7],[7,1,9,3,2,7,5,6,8],[6,4,3,9,7,2,1,7,5]]
 
     statusChange = auxiliar.Auxiliar.adjacent_triplet(status)
 
@@ -38,7 +40,7 @@ if __name__ == '__main__':
 
     print(statuschange2)
 
-    pom = hitori(statusChange)
+    pom = hitori(statuschange2)
     hitori_resolver = probee.ProblemaEspacioEstados(pom.acciones, pom.estado_inicial)
 
     print(len(pom.acciones))
@@ -76,6 +78,8 @@ if __name__ == '__main__':
 
     b_a_estrella = busqee.BúsquedaAEstrella(h)
     print(b_a_estrella.buscar(hitori_resolver))
+    
+
 
 finish_time = time()
 
