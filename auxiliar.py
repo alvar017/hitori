@@ -94,3 +94,71 @@ class Auxiliar():
         fig.tight_layout()
         plt.show()
         return estado
+
+    def detallado(self):
+        detallado = "error"
+        counter = 0
+        while detallado == "error":
+            detallado = input("¿Quiere una solución detallada? (si/no): ")
+            if detallado == "si":
+                detallado = True
+            elif detallado == "no":
+                detallado = False
+            else:
+                counter = counter + 1
+                detallado = "error"
+                print("\nComnando incorrecto la respuesta tiene que ser si ó no")
+                print('Este es su error {}. Después de 3 error se realizará una búsqueda sin detallado\n'.format(counter))
+                if counter == 3:
+                    detallado = False
+        print("\nRealizando la búsqueda, sea paciente por favor.\n")
+        return detallado
+
+    def inserta_matriz(self):
+        status = []
+        n = input("Intruduzca su matriz a resolver: ")
+        n = list(n.split("],["))
+        for i in range(len(n)):
+            if i == 0:
+                n[0] = n[0][2:]
+            if i == len(n) - 1:
+                n[i] = n[i][:-2]
+            n[i].replace("[", "")
+        for i in range(len(n)):
+            cells = []
+            aux = n[i].split(",")
+            for j in range(len(aux)):
+                cells.append(int(aux[j]))
+            status.append(cells)
+        return status
+
+    def elige_algoritmo(self):
+        resolucion = 9
+        counter = 0
+
+        while resolucion == 9:
+            n = (input(
+                '\nSeleccione algoritmo de búsqueda\n' +
+                '1: Búsqueda en Anchura,\n'
+                '2: Búsqueda en Profundidad,\n'
+                '3: Búsqueda óptima,\n'
+                '4: Búsqueda A*,\n'
+                '\nDecisión:'))
+            if n == '1':
+                resolucion = 1
+            elif n == '2':
+                resolucion = 2
+            elif n == '3':
+                resolucion = 3
+            elif n == '4':
+                resolucion = 4
+            else:
+                counter = counter + 1
+                print("\nSolución no válida. Recuerde que debe introducir un número entre 1 y 4")
+                print('Este es su error {}. Después de 3 error se realizará una búsqueda A*'.format(counter))
+                if counter == 3:
+                    resolucion = 4
+                else:
+                    resolucion = 9
+        return resolucion
+

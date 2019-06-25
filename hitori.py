@@ -24,81 +24,74 @@ class hitori(probee.ProblemaEspacioEstados):
 
 if __name__ == '__main__':
 
-    status = []
-    n = input("Intruduzca su matriz a resolver: ")
-    n = list(n.split("],["))
-    for i in range(len(n)):
-        if i == 0:
-            n[0] = n[0][2:]
-        if i == len(n)-1:
-            n[i] = n[i][:-2]
-        n[i].replace("[", "")
-    for i in range(len(n)):
-        cells = []
-        aux = n[i].split(",")
-        for j in range(len(aux)):
-            cells.append(int(aux[j]))
-        status.append(cells)
+    # Interactivo
+    status = auxiliar.Auxiliar.inserta_matriz(None)
+    resolucion = auxiliar.Auxiliar.elige_algoritmo(None)
+    # Interactivo
 
-    resolucion = 9
-
-    while resolucion == 9:
-        n = (input(
-            '\nSeleccione algoritmo de búsqueda\n' +
-            '1: Búsqueda en Anchura,\n'
-            '2: Búsqueda en Profundidad,\n'
-            '3: Búsqueda óptima,\n'
-            '4: Búsqueda A*,\n'
-            'Cualquier otro parámetro para salir\n'
-            'Decisión:'))
-        if n == '1':
-            resolucion = 1
-        elif n == '2':
-            resolucion = 2
-        elif n == '3':
-            resolucion = 3
-        elif n == '4':
-            resolucion = 4
-        else:
-            print("Solución no válida. Recuerde que debe introducir un número entre 1 y 4")
-            resolucion = 9
-
-
+    # Programatico
 #    status = [[1,8,2,4,3,9,4,1,5],[6,5,5,1,1,4,9,3,3],[8,4,6,9,5,3,2,6,7],[4,8,3,8,7,8,8,2,9],[1,6,4,2,3,6,5,9,1],[9,5,8,3,5,2,7,6,1],[2,5,3,1,6,4,4,2,8],[5,4,4,2,9,3,7,7,6],[7,9,1,5,1,6,3,8,8]]
+#    resolucion = 4
+    # Programatico
 
-    start_time = time()
+    start_time1 = time()
+
     statusChange = auxiliar.Auxiliar.adjacent_triplet(status)
-
-    print(statusChange)
-
     statusChangeTras = [[statusChange[j][i] for j in range(len(statusChange))] for i in range(len(statusChange[0]))]
-
-    print(statusChangeTras)
-
     statuschange2 = auxiliar.Auxiliar.pair_induction(statusChange, statusChangeTras)
-
-    print(statuschange2)
-
     pom = hitori(statuschange2)
     hitori_resolver = probee.ProblemaEspacioEstados(pom.acciones, pom.estado_inicial)
 
-    print(len(pom.acciones))
-    print(pom.acciones)
+    finish_time1 = time()
+    execute_time1 = finish_time1 - start_time1
+
+#    print(statusChange)
+#    print(statusChangeTras)
+#    print(statuschange2)
+#    print(len(pom.acciones))
+#    print(pom.acciones)
 
     if resolucion == 1:
         # Búsqueda en anchura
-        b_anchura = busqee.BúsquedaEnAnchura(detallado=True)
+        detallado = auxiliar.Auxiliar.detallado(None)
+        start_time2 = time()
+
+        b_anchura = busqee.BúsquedaEnAnchura(detallado)
         print(b_anchura.buscar(hitori_resolver))
+
+        finish_time2 = time()
+        execute_time2 = finish_time2 - start_time2
+        execute_time = execute_time1 + execute_time2
+
     elif resolucion == 2:
         # Búsqueda en profundidad
-        b_profundidad = busqee.BúsquedaEnProfundidad(detallado=True)
+        detallado = auxiliar.Auxiliar.detallado(None)
+        start_time2 = time()
+
+        b_profundidad = busqee.BúsquedaEnProfundidad(detallado)
         print(b_profundidad.buscar(hitori_resolver))
+
+        finish_time2 = time()
+        execute_time2 = finish_time2 - start_time2
+        execute_time = execute_time1 + execute_time2
+
     elif resolucion == 3:
         # Búsqueda óptima
-        b_óptima = busqee.BúsquedaÓptima(detallado=True)
+        detallado = auxiliar.Auxiliar.detallado(None)
+        start_time2 = time()
+
+        b_óptima = busqee.BúsquedaÓptima(detallado)
         print(b_óptima.buscar(hitori_resolver))
+
+        finish_time2 = time()
+        execute_time2 = finish_time2 - start_time2
+        execute_time = execute_time1 + execute_time2
+
     elif resolucion == 4:
         # Búsqueda A*
+        print("\nRealizando la búsqueda, sea paciente por favor.\n")
+        start_time2 = time()
+
         def h(nodo):
             estado = nodo.estado
             row = 100000000000000
@@ -114,13 +107,10 @@ if __name__ == '__main__':
 
         b_a_estrella = busqee.BúsquedaAEstrella(h)
         print(b_a_estrella.buscar(hitori_resolver))
-    
 
+        finish_time2 = time()
+        execute_time2 = finish_time2 - start_time2
+        execute_time = execute_time1 + execute_time2
 
-finish_time = time()
-
-execute_time = finish_time - start_time
-
-print("La ejecución ha tardado: ")
-print(execute_time)
+print("\nLa ejecución ha tardado: {}\n".format(execute_time))
 
