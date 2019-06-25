@@ -1,3 +1,8 @@
+import matplotlib
+import matplotlib.pyplot as plt
+import auxiliar as auxiliar
+
+
 class Acción:
     def __init__(self, nombre='', aplicabilidad=None, aplicación=None,
                  coste=None):
@@ -59,6 +64,7 @@ class ProblemaEspacioEstados:
             for i in range(len(estado)):
                 print(estado[i])
             print("Solución")
+            auxiliar.Auxiliar.imprime_solucion(estado)
         return res
 
     def acciones_aplicables(self, estado):
