@@ -1,6 +1,10 @@
 import collections
 import heapq
 import types
+from time import time
+import auxiliar as auxiliar
+import copy
+
 
 
 class ListaNodos(collections.deque):
@@ -109,12 +113,14 @@ class NodoConHeurística(NodoSimple):
 
 class BúsquedaGeneral:
     def __init__(self, detallado=False):
+        startTimeSearch = time()
         self.detallado = detallado
         if self.detallado:
             self.Nodo = NodoConProfundidad
         else:
             self.Nodo = NodoSimple
         self.explorados = ListaNodos()
+        self.startTimeSearch = startTimeSearch
 
     def es_expandible(self, nodo):
         return True
@@ -135,6 +141,11 @@ class BúsquedaGeneral:
             if not self.frontera:
                 return None
             nodo = self.frontera.sacar()
+            state = copy.deepcopy(nodo.estado)
+            res = auxiliar.Auxiliar.multipleCero(state)
+            while res:
+                res = auxiliar.Auxiliar.multipleCero(state)
+            nodo.estado = state
             if self.detallado:
                 print('{0}Nodo: {1}'.format('  ' * nodo.profundidad, nodo))
             if problema.es_estado_final(nodo.estado):
@@ -224,6 +235,9 @@ class BúsquedaAEstrella(BúsquedaPrimeroElMejor):
             return nodo.coste
 
         def f(nodo):
+            cost = coste(nodo)
+            he = h(nodo)
+            costHe = cost + he
             return coste(nodo) + h(nodo)
 
         super().__init__(f, detallado)

@@ -17,16 +17,37 @@ class Auxiliar():
             for i in range(len(new_status)):
                 if len(status) - i >= 3:
                     if new_status[i][j] == new_status[i+1][j] == new_status[i+2][j]:
-                        print("Entro en el if")
                         new_status[i][j] = 0
                         new_status[i+2][j] = 0
         for i in range(len(new_status)):
             for j in range(len(new_status[0])):
                 if len(status[0]) - j >= 3:
                     if new_status[i][j] == new_status[i][j+1] == new_status[i][j+2]:
-                        print("Entro en el if")
                         new_status[i][j] = 0
                         new_status[i][j+2] = 0
+        return new_status
+
+    def twoNext(status):
+        new_status = copy.deepcopy(status)
+        for j in range(len(new_status[0])):
+            for i in range(len(new_status)):
+                if len(status) - i >= 2:
+                    if new_status[i][j] == new_status[i+1][j]:
+                        valour = new_status[i][j]
+
+                        for i2 in range(len(new_status)):
+                            colum = (new_status[i2][j])
+                            if (new_status[i2][j] == valour and i2 != i and i2 != i + 1):
+                                new_status[i2][j] = 0
+        for i in range(len(new_status)):
+            for j in range(len(new_status[0])):
+                if len(status[0]) - j >= 2:
+                    if new_status[i][j] == new_status[i][j+1]:
+                        valour = new_status[i][j]
+                        row = new_status[i]
+                        for l in range(len(new_status[0])):
+                            if(new_status[i][l] == valour and l != j and l != j+1):
+                                new_status[i][l] = 0
         return new_status
 
     def square_between_a_pair(status):
@@ -178,4 +199,64 @@ class Auxiliar():
                 columnas = columnas + 1
         res = filas + columnas
         return res
+
+    def multipleCero(status):
+        new_status = status
+        res = 0
+        bool = False
+        for i in range(len(new_status)):
+            for j in range(len(new_status[0])):
+                if new_status[i][j] == 0:
+                    cell = new_status[i][j]
+                    if(i > 0):
+                        valourUp = new_status[i-1][j]
+                        row = status[i - 1]
+                        for jj in range(len(new_status[0])):
+                            if(new_status[i-1][jj] == valourUp and jj != j):
+                                new_status[i-1][jj] = 0
+                                res = res + 1
+                        for i2 in range(len(new_status)):
+                            colum = (new_status[i2][j])
+                            if(colum == valourUp and i - 1 != i2):
+                                new_status[i2][j] = 0
+                                res = res + 1
+                    if(i < len(new_status) - 1):
+                        valourDown = new_status[i + 1][j]
+                        row = status[i + 1]
+                        for jj in range(len(new_status[0])):
+                            if (new_status[i + 1][jj] == valourDown and jj != j):
+                                new_status[i + 1][jj] = 0
+                                res = res + 1
+                        for i2 in range(len(new_status)):
+                            colum = (new_status[i2][j])
+                            if(colum == valourDown and i + 1 != i2):
+                                new_status[i2][j] = 0
+                                res = res + 1
+                    if (j < len(new_status[0]) - 1):
+                        valourRight = new_status[i][j+1]
+                        row = status[i]
+                        for jj in range(len(new_status[0])):
+                            if (new_status[i][jj] == valourRight and jj != j + 1):
+                                new_status[i][jj] = 0
+                                res = res + 1
+                        for i2 in range(len(new_status)):
+                            colum = (new_status[i2][j + 1])
+                            if(colum == valourRight and i != i2):
+                                new_status[i2][j + 1] = 0
+                                res = res + 1
+                    if(j > 0):
+                        valourLeft = new_status[i][j-1]
+                        row = status[i]
+                        for jj in range(len(new_status[0])):
+                            if (new_status[i][jj] == valourLeft and jj != j - 1):
+                                new_status[i][jj] = 0
+                                res = res + 1
+                        for i2 in range(len(new_status)):
+                            colum = (new_status[i2][j - 1])
+                            if (colum == valourLeft and i != i2):
+                                new_status[i2][j - 1] = 0
+                                res = res + 1
+        if(res > 0):
+            bool = True
+        return bool
 

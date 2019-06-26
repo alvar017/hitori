@@ -30,7 +30,7 @@ if __name__ == '__main__':
     # Interactivo
 
     # Programatico
-    status = [[8,6,2,1,4,4,3,2,7],[2,4,8,9,8,6,5,2,5],[4,8,9,7,2,4,6,6,3],[6,8,5,3,7,9,8,7,4],[7,7,4,8,5,2,7,3,9],[2,9,7,5,8,3,7,5,1],[6,5,6,5,1,7,2,8,1],[9,1,7,7,3,4,2,5,8],[4,3,1,5,9,8,4,7,6]]
+    status = [[1,6,3,5,9,2,8,4,8],[6,7,4,2,1,3,1,8,9],[1,4,8,8,2,2,9,5,1],[2,8,7,6,3,4,7,9,5],[1,3,5,9,8,2,6,7,2],[8,4,7,1,7,5,7,6,3],[9,7,3,6,6,1,2,8,8],[5,2,3,8,4,1,7,3,6],[4,7,6,9,2,7,7,2,8]]
     resolucion = 4
     # Programatico
 
@@ -38,8 +38,15 @@ if __name__ == '__main__':
 
     statusChange = auxiliar.Auxiliar.adjacent_triplet(status)
     statusChangeTras = [[statusChange[j][i] for j in range(len(statusChange))] for i in range(len(statusChange[0]))]
-    statuschange2 = auxiliar.Auxiliar.pair_induction(statusChange, statusChangeTras)
-    pom = hitori(statuschange2)
+#    statuschange2 = auxiliar.Auxiliar.pair_induction(statusChange, statusChangeTras)
+    statusTry2Next = auxiliar.Auxiliar.twoNext(statusChange)
+#    newStateMultipleCopy = copy.deepcopy(statusTry2Next)
+
+#    res = auxiliar.Auxiliar.multipleCero(newStateMultipleCopy)
+#    while res :
+#        res = auxiliar.Auxiliar.multipleCero(newStateMultipleCopy)
+
+    pom = hitori(statusTry2Next)
     hitori_resolver = probee.ProblemaEspacioEstados(pom.acciones, pom.estado_inicial)
 
     finish_time1 = time()
@@ -47,12 +54,15 @@ if __name__ == '__main__':
 
     print(statusChange)
     print(statusChangeTras)
-    print(statuschange2)
+#    print(statuschange2)
+    print(statusTry2Next)
+#    print(newStateMultipleCopy)
+
     print(len(pom.acciones))
     print(pom.acciones)
 
     numberRepeats = 0
-    numberRepeats = auxiliar.Auxiliar.repeatsNumber(statuschange2)
+    numberRepeats = auxiliar.Auxiliar.repeatsNumber(statusTry2Next)
 
     print("numberRepeats")
     print(numberRepeats)
@@ -104,10 +114,10 @@ if __name__ == '__main__':
             row = 100000000000000
             zeros = 0
             numberRepeatsNode = auxiliar.Auxiliar.repeatsNumber(estado)
-            for i in range(len(estado)):
-                to_check_row = list(estado[i])
-                zeros = zeros + 1 * to_check_row.count(0)
-                row = row - 10000 * len(set(to_check_row))
+#            for i in range(len(estado)):
+#                to_check_row = list(estado[i])
+#                zeros = zeros + 1 * to_check_row.count(0)
+#                row = row - 10000 * len(set(to_check_row))
             square = auxiliar.Auxiliar.square_between_a_pair(estado)
             if square:
                 zeros = 0
