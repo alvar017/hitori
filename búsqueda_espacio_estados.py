@@ -142,9 +142,6 @@ class BúsquedaGeneral:
                 return None
             nodo = self.frontera.sacar()
             state = copy.deepcopy(nodo.estado)
-            res = auxiliar.Auxiliar.multipleCero(state)
-            while res:
-                res = auxiliar.Auxiliar.multipleCero(state)
             nodo.estado = state
             if self.detallado:
                 print('{0}Nodo: {1}'.format('  ' * nodo.profundidad, nodo))

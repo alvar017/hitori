@@ -1,7 +1,7 @@
 import matplotlib
 import matplotlib.pyplot as plt
 import auxiliar as auxiliar
-
+from scipy.ndimage import label
 
 class Acción:
     def __init__(self, nombre='', aplicabilidad=None, aplicación=None,
@@ -60,11 +60,12 @@ class ProblemaEspacioEstados:
                 break
         res = filas & columnas
         if res:
+            print(label(estado)[1])
             print("Solución")
             for i in range(len(estado)):
                 print(estado[i])
             print("Solución")
-#            auxiliar.Auxiliar.imprime_solucion(estado)
+            auxiliar.Auxiliar.imprime_solucion(estado)
         return res
 
     def acciones_aplicables(self, estado):
