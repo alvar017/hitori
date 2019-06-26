@@ -162,3 +162,20 @@ class Auxiliar():
                     resolucion = 9
         return resolucion
 
+    def repeatsNumber(estado):
+        filas = 0
+        columnas = 0
+        for i in range(len(estado)):
+            to_check_row = list(filter(lambda x: x != 0, estado[i]))
+            to_check_row_distinct = list(set(to_check_row))
+            if len(to_check_row) != len(to_check_row_distinct):
+                filas = filas + 1
+        estado_traspuesta = [[estado[j][i] for j in range(len(estado))] for i in range(len(estado[0]))]
+        for i in range(len(estado_traspuesta)):
+            to_check_row = list(filter(lambda x: x != 0, estado_traspuesta[i]))
+            to_check_row_distinct = list(set(to_check_row))
+            if len(to_check_row) != len(to_check_row_distinct):
+                columnas = columnas + 1
+        res = filas + columnas
+        return res
+

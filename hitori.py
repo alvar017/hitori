@@ -45,11 +45,18 @@ if __name__ == '__main__':
     finish_time1 = time()
     execute_time1 = finish_time1 - start_time1
 
-#    print(statusChange)
-#    print(statusChangeTras)
-#    print(statuschange2)
-#    print(len(pom.acciones))
-#    print(pom.acciones)
+    print(statusChange)
+    print(statusChangeTras)
+    print(statuschange2)
+    print(len(pom.acciones))
+    print(pom.acciones)
+
+    numberRepeats = 0
+    numberRepeats = auxiliar.Auxiliar.repeatsNumber(statuschange2)
+
+    print("numberRepeats")
+    print(numberRepeats)
+    print("numberRepeats")
 
     if resolucion == 1:
         # Búsqueda en anchura
@@ -96,6 +103,7 @@ if __name__ == '__main__':
             estado = nodo.estado
             row = 100000000000000
             zeros = 0
+            numberRepeatsNode = auxiliar.Auxiliar.repeatsNumber(estado)
             for i in range(len(estado)):
                 to_check_row = list(estado[i])
                 zeros = zeros + 1 * to_check_row.count(0)
@@ -103,6 +111,7 @@ if __name__ == '__main__':
             square = auxiliar.Auxiliar.square_between_a_pair(estado)
             if square:
                 zeros = 0
+            row = row + 10000 * numberRepeatsNode
             return row - 10000 * zeros
 
         b_a_estrella = busqee.BúsquedaAEstrella(h)
