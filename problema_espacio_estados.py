@@ -64,7 +64,7 @@ class ProblemaEspacioEstados:
             for i in range(len(estado)):
                 print(estado[i])
             print("Número de componentes conexas: {}".format(label(estado)[1]))
-            auxiliar.Auxiliar.imprime_solucion(estado)
+            auxiliar.Auxiliar.imprime_solucion(estado, "Solución al tablero hitori propuesto")
         return res
 
     def acciones_aplicables(self, estado):

@@ -92,7 +92,7 @@ class Auxiliar():
                         estado_copy[j][i] = 0
         return estado_copy
 
-    def imprime_solucion(estado):
+    def imprime_solucion(estado, mensaje):
         filas = []
         columnas = []
         for i in range(len(estado)):
@@ -121,7 +121,7 @@ class Auxiliar():
             for j in range(len(columnas)):
                 text = ax.text(j, i, harvest[i, j],
                                ha="center", va="center", color="black")
-        ax.set_title("Solución del hitori propuesto")
+        ax.set_title(mensaje)
         fig.tight_layout()
         plt.show()
         return estado

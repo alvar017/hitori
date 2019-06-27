@@ -36,6 +36,7 @@ if __name__ == '__main__':
         resolucion = 4
         # Programatico
 
+        auxiliar.Auxiliar.imprime_solucion(status, "Tablero hitori propuesto")
         start_time1 = time()
 
         statusChange = auxiliar.Auxiliar.adjacent_triplet(status)
