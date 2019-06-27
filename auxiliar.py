@@ -1,6 +1,6 @@
 import copy
 import numpy as np
-import matplotlib
+from matplotlib import colors
 import matplotlib.pyplot as plt
 
 
@@ -101,16 +101,26 @@ class Auxiliar():
             columnas.append(j)
         harvest = np.array(estado)
         fig, ax = plt.subplots()
-        im = ax.imshow(harvest)
+        # BLANCO Y NEGRO
+        cmap = colors.ListedColormap(['black', 'white'])
+        bounds = [0, 1, 1]
+        norm = colors.BoundaryNorm(bounds, cmap.N)
+        im = ax.imshow(harvest, interpolation='nearest', origin='lower',
+                    cmap=cmap, norm=norm)
+        # BLANCO Y NEGRO
+        # COLORES
+        #im = ax.imshow(harvest)
+        # COLORES
         ax.set_xticks(np.arange(len(columnas)))
         ax.set_yticks(np.arange(len(filas)))
         ax.set_xticklabels(columnas)
         ax.set_yticklabels(filas)
-        plt.setp(ax.get_xticklabels(), rotation=45, ha="right", rotation_mode="anchor")
+        plt.setp(ax.get_yticklabels(), rotation=0, ha="right", rotation_mode="anchor")
+        #plt.grid(which='major', color='black', linestyle='-', linewidth=1)
         for i in range(len(filas)):
             for j in range(len(columnas)):
                 text = ax.text(j, i, harvest[i, j],
-                               ha="center", va="center", color="w")
+                               ha="center", va="center", color="black")
         ax.set_title("Solución del hitori propuesto")
         fig.tight_layout()
         plt.show()
