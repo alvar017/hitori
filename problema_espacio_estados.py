@@ -60,11 +60,10 @@ class ProblemaEspacioEstados:
                 break
         res = filas & columnas
         if res:
-            print(label(estado)[1])
-            print("Solución")
+            print("Matriz solución:")
             for i in range(len(estado)):
                 print(estado[i])
-            print("Solución")
+            print("Número de componentes conexas: {}".format(label(estado)[1]))
             auxiliar.Auxiliar.imprime_solucion(estado)
         return res
 
