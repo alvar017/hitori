@@ -1,0 +1,296 @@
+C:\Users\anton\Documentos\IA\pyUP\venv\Scripts\python.exe C:\Users\anton\Documentos\IA\pyUP\executeTXT.py
+1 [[1,2,1],[2,2,1],[3,1,2]]
+
+
+Realizando la búsqueda, sea paciente por favor.
+
+Matriz solución:
+[1, 2, 0]
+[2, 0, 1]
+[3, 1, 2]
+Número de componentes conexas: 1
+
+La ejecución ha tardado: 0.0
+
+2 [[3,1,2],[1,3,2],[3,1,1]]
+
+
+Realizando la búsqueda, sea paciente por favor.
+
+Matriz solución:
+[0, 1, 0]
+[1, 3, 2]
+[3, 0, 1]
+Número de componentes conexas: 1
+
+La ejecución ha tardado: 0.015608549118041992
+
+3 [[3,2,3],[2,1,2],[3,3,1]]
+
+
+Realizando la búsqueda, sea paciente por favor.
+
+Matriz solución:
+[0, 2, 3]
+[2, 1, 0]
+[0, 3, 1]
+Número de componentes conexas: 1
+
+La ejecución ha tardado: 0.0
+
+4 [[1,2,2],[2,3,1],[1,3,2]]
+
+
+Realizando la búsqueda, sea paciente por favor.
+
+Matriz solución:
+[1, 0, 2]
+[2, 3, 1]
+[0, 0, 0]
+Número de componentes conexas: 1
+
+La ejecución ha tardado: 0.0
+
+5 [[3,2,2],[3,3,1],[2,1,2]]
+
+
+Realizando la búsqueda, sea paciente por favor.
+
+Matriz solución:
+[3, 2, 0]
+[0, 3, 1]
+[2, 1, 0]
+Número de componentes conexas: 1
+
+La ejecución ha tardado: 0.0
+
+6 [[1,4,4,2],[4,1,3,2],[2,1,1,2],[1,4,2,1]]
+
+
+Realizando la búsqueda, sea paciente por favor.
+
+Matriz solución:
+[1, 0, 4, 0]
+[4, 1, 3, 2]
+[2, 0, 1, 0]
+[0, 4, 2, 1]
+Número de componentes conexas: 1
+
+La ejecución ha tardado: 0.0
+
+7 [[2,4,2,3],[1,3,4,2],[4,2,3,1],[3,2,2,2]]
+
+
+Realizando la búsqueda, sea paciente por favor.
+
+Matriz solución:
+[2, 4, 0, 3]
+[1, 3, 4, 2]
+[4, 2, 3, 1]
+[3, 0, 2, 0]
+Número de componentes conexas: 1
+
+La ejecución ha tardado: 0.0
+
+8 [[2,2,4,1],[3,1,1,4],[2,4,3,2],[4,2,1,4]]
+
+
+Realizando la búsqueda, sea paciente por favor.
+
+Matriz solución:
+[2, 0, 4, 1]
+[3, 1, 0, 4]
+[0, 4, 3, 2]
+[4, 2, 1, 0]
+Número de componentes conexas: 1
+
+La ejecución ha tardado: 0.01564335823059082
+
+9 [[2,2,2,4],[1,4,2,3],[2,3,2,1],[3,4,1,2]]
+
+
+Realizando la búsqueda, sea paciente por favor.
+
+Matriz solución:
+[0, 2, 0, 4]
+[1, 4, 2, 3]
+[2, 3, 0, 1]
+[3, 0, 1, 2]
+Número de componentes conexas: 1
+
+La ejecución ha tardado: 0.0
+
+10 [[3,1,3,4],[1,2,4,3],[3,1,1,4],[3,4,2,4]]
+
+
+Realizando la búsqueda, sea paciente por favor.
+
+Matriz solución:
+[0, 1, 3, 0]
+[1, 2, 4, 3]
+[3, 0, 1, 4]
+[0, 4, 2, 0]
+Número de componentes conexas: 1
+
+La ejecución ha tardado: 0.0
+
+11 [[3,3,2,5,1],[1,5,2,5,3],[2,4,3,1,2],[4,2,4,3,2],[2,1,4,2,5]]
+
+
+Realizando la búsqueda, sea paciente por favor.
+
+Matriz solución:
+[0, 3, 0, 5, 1]
+[1, 5, 2, 0, 3]
+[0, 4, 3, 1, 2]
+[4, 2, 0, 3, 0]
+[0, 1, 4, 2, 5]
+Número de componentes conexas: 1
+
+La ejecución ha tardado: 0.031229257583618164
+
+12 [[2,2,1,5,1],[4,2,2,1,5],[4,1,5,1,4],[3,3,2,4,1],[1,4,3,5,2]]
+
+
+Realizando la búsqueda, sea paciente por favor.
+
+Matriz solución:
+[2, 0, 1, 5, 0]
+[4, 2, 0, 1, 5]
+[0, 1, 5, 0, 4]
+[3, 0, 2, 4, 1]
+[1, 4, 3, 0, 2]
+Número de componentes conexas: 1
+
+La ejecución ha tardado: 0.022130966186523438
+
+13 [[1,1,2,5,4],[2,5,2,4,5],[2,2,3,1,5],[4,4,1,5,3],[1,4,5,2,2]]
+
+
+Realizando la búsqueda, sea paciente por favor.
+
+Matriz solución:
+[0, 1, 2, 5, 4]
+[2, 5, 0, 4, 0]
+[0, 2, 3, 1, 5]
+[4, 0, 1, 0, 3]
+[1, 4, 5, 2, 0]
+Número de componentes conexas: 1
+
+La ejecución ha tardado: 0.015624523162841797
+
+14 [[3,5,1,3,4],[5,3,4,4,1],[3,4,5,1,1],[1,3,2,1,3],[4,1,3,2,4]]
+
+
+Realizando la búsqueda, sea paciente por favor.
+
+Matriz solución:
+[0, 5, 1, 3, 0]
+[5, 3, 0, 4, 1]
+[3, 4, 5, 1, 0]
+[1, 0, 2, 0, 3]
+[0, 1, 3, 2, 4]
+Número de componentes conexas: 1
+
+La ejecución ha tardado: 0.01562356948852539
+
+15 [[5,4,2,3,2],[4,2,3,1,3],[1,5,4,2,1],[4,1,3,4,2],[3,4,4,5,4]]
+
+
+Realizando la búsqueda, sea paciente por favor.
+
+Matriz solución:
+[5, 0, 2, 3, 0]
+[4, 2, 0, 1, 3]
+[1, 5, 4, 2, 0]
+[0, 1, 3, 4, 2]
+[3, 4, 0, 5, 0]
+Número de componentes conexas: 1
+
+La ejecución ha tardado: 0.015626192092895508
+
+16 [[3,1,3,2,6,4],[1,2,6,3,3,5],[3,1,1,5,4,1],[3,4,2,6,3,3],[2,6,3,1,5,4],[2,5,3,1,2,4]]
+
+
+Realizando la búsqueda, sea paciente por favor.
+
+Matriz solución:
+[0, 1, 0, 2, 6, 0]
+[1, 2, 6, 0, 3, 5]
+[3, 0, 1, 5, 4, 0]
+[0, 4, 2, 6, 0, 3]
+[2, 6, 0, 1, 5, 4]
+[0, 5, 3, 0, 2, 0]
+Número de componentes conexas: 1
+
+La ejecución ha tardado: 0.03775477409362793
+
+17 [[4,4,1,3,6,1],[1,2,3,5,4,5],[4,5,2,1,2,3],[5,5,4,6,2,4],[5,1,6,5,3,5],[3,1,4,2,1,5]]
+
+
+Realizando la búsqueda, sea paciente por favor.
+
+Matriz solución:
+[0, 4, 0, 3, 6, 1]
+[1, 2, 3, 5, 4, 0]
+[4, 0, 2, 1, 0, 3]
+[0, 5, 0, 6, 2, 4]
+[5, 1, 6, 0, 3, 0]
+[3, 0, 4, 2, 1, 5]
+Número de componentes conexas: 1
+
+La ejecución ha tardado: 0.015629291534423828
+
+18 [[3,1,5,3,2,6],[5,3,4,5,4,4],[2,4,3,6,1,5],[5,5,3,3,3,4],[5,2,4,5,3,1],[5,6,4,2,5,1]]
+
+
+Realizando la búsqueda, sea paciente por favor.
+
+Matriz solución:
+[3, 1, 5, 0, 2, 6]
+[0, 3, 0, 5, 4, 0]
+[2, 4, 3, 6, 1, 5]
+[0, 5, 0, 3, 0, 4]
+[5, 2, 4, 0, 3, 1]
+[0, 6, 0, 2, 5, 0]
+Número de componentes conexas: 1
+
+La ejecución ha tardado: 0.015624761581420898
+
+19 [[3,3,5,2,1,4],[1,2,1,5,4,5],[3,1,1,1,2,5],[5,6,4,2,3,1],[4,5,2,1,1,3],[1,1,5,3,5,4]]
+
+
+Realizando la búsqueda, sea paciente por favor.
+
+Matriz solución:
+[0, 3, 5, 0, 1, 4]
+[1, 2, 0, 5, 4, 0]
+[3, 0, 1, 0, 2, 5]
+[5, 6, 4, 2, 3, 1]
+[4, 5, 2, 1, 0, 3]
+[0, 1, 0, 3, 5, 0]
+Número de componentes conexas: 1
+
+La ejecución ha tardado: 0.0
+
+20 [[3,4,5,5,1,3],[5,6,2,3,2,1],[5,3,1,4,5,4],[1,4,3,4,2,2],[3,1,6,1,4,5],[1,2,1,5,3,4]]
+
+
+Realizando la búsqueda, sea paciente por favor.
+
+Matriz solución:
+[0, 4, 5, 0, 1, 3]
+[5, 6, 2, 3, 0, 1]
+[0, 3, 1, 0, 5, 4]
+[1, 0, 3, 4, 2, 0]
+[3, 1, 6, 0, 4, 5]
+[0, 2, 0, 5, 3, 0]
+Número de componentes conexas: 1
+
+La ejecución ha tardado: 0.06902074813842773
+
+
+La ejecución total del archivo ha tardado: 0.2695159912109375 segundos
+
+
+Process finished with exit code 0
