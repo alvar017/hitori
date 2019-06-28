@@ -194,26 +194,22 @@ class CrossOut(probee.Acción):
         return res
 
     def es_aplicable(self, estado):
-        res = not self.is_cross(estado) \
-               and not self.exist_black_cell_around(estado) \
-               and (self.exist_in_colum(estado) or self.exist_in_row(estado)) \
-               and not self.check_isolate(estado) \
-               and not self.square_between_a_pair(estado)
-
+        res = not self.is_cross(estado)
 #               and not self.check_black_cell_around(estado)
 #               Estos dos últimos métodos también funcionan pero van un poco más lento
-        estado_copia = copy.deepcopy(estado)
-        if res:
-            aux = auxiliar.Auxiliar.multipleCero(estado)
-            while aux:
-                aux = auxiliar.Auxiliar.multipleCero(estado)
-        if label(estado)[1] != 1:
-            estado = estado_copia
         return res
 
     def aplicar(self, estado):
         nuevo_estado = copy.deepcopy(estado)
-        nuevo_estado[self.cell_row][self.cell_colum] = 0
+        res = not self.exist_black_cell_around(estado) \
+               and (self.exist_in_colum(estado) or self.exist_in_row(estado)) \
+               and not self.check_isolate(estado) \
+               and not self.square_between_a_pair(estado)
+        if not res:
+            nuevo_estado = auxiliar.Auxiliar.no_aplicable(estado, self.cell_row, self.cell_colum)
+        else:
+            nuevo_estado[self.cell_row][self.cell_colum] = 0
+            aux = auxiliar.Auxiliar.multipleCero(nuevo_estado)
         if label(nuevo_estado)[1] != 1:
             nuevo_estado = estado
         return nuevo_estado
@@ -231,7 +227,7 @@ class CrossOut(probee.Acción):
             coste = coste - 10000 * number_colum
         if (number_row > 1):
             coste = coste - 10000 * number_row
-        return coste
+        return 1
 
 
 

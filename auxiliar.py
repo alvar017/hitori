@@ -96,27 +96,30 @@ class Auxiliar():
         filas = []
         columnas = []
         for i in range(len(estado)):
-            filas.append(i)
+            filas.append(len(estado) - 1 - i)
         for j in range(len(estado[0])):
             columnas.append(j)
-        harvest = np.array(estado)
+        estado2 = []
+        for x in range(len(estado)):
+            estado2.append(estado[len(estado) - 1 - x])
+        harvest = np.array(estado2)
         fig, ax = plt.subplots()
         # BLANCO Y NEGRO
         cmap = colors.ListedColormap(['black', 'white'])
         bounds = [0, 1, 1]
         norm = colors.BoundaryNorm(bounds, cmap.N)
         im = ax.imshow(harvest, interpolation='nearest', origin='lower',
-                    cmap=cmap, norm=norm)
+                       cmap=cmap, norm=norm)
         # BLANCO Y NEGRO
         # COLORES
-        #im = ax.imshow(harvest)
+        # im = ax.imshow(harvest)
         # COLORES
         ax.set_xticks(np.arange(len(columnas)))
         ax.set_yticks(np.arange(len(filas)))
         ax.set_xticklabels(columnas)
         ax.set_yticklabels(filas)
         plt.setp(ax.get_yticklabels(), rotation=0, ha="right", rotation_mode="anchor")
-        #plt.grid(which='major', color='black', linestyle='-', linewidth=1)
+        # plt.grid(which='major', color='black', linestyle='-', linewidth=1)
         for i in range(len(filas)):
             for j in range(len(columnas)):
                 text = ax.text(j, i, harvest[i, j],
@@ -269,4 +272,15 @@ class Auxiliar():
         if(res > 0):
             bool = True
         return bool
+
+    def no_aplicable(status, fila, columna):
+        copy_status = copy.deepcopy(status)
+        valor = copy_status[fila][columna]
+        for i in range(len(copy_status)):
+            if valor == copy_status[i][columna] & i != fila:
+                copy_status[i][columna] = 0
+        for j in range(len(copy_status[0])):
+            if valor == copy_status[fila][j] & i != fila:
+                copy_status[fila][j] = 0
+        return copy_status
 

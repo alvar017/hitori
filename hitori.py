@@ -1,4 +1,4 @@
-import problema_espacio_estados as probee
+﻿import problema_espacio_estados as probee
 
 import búsqueda_espacio_estados as busqee
 
@@ -27,12 +27,12 @@ if __name__ == '__main__':
     repetir = "si"
     while repetir == "si":
         # Interactivo
-    #    status = auxiliar.Auxiliar.inserta_matriz(None)
-    #    resolucion = auxiliar.Auxiliar.elige_algoritmo(None)
+#        status = auxiliar.Auxiliar.inserta_matriz(None)
+#        resolucion = auxiliar.Auxiliar.elige_algoritmo(None)
         # Interactivo
 
         # Programatico
-        status = [[3,2,9,1,8,6,5,4,6],[3,8,1,2,7,5,9,5,4],[9,4,5,4,6,3,3,8,1],[9,4,1,9,5,7,5,1,2],[1,9,7,5,2,8,4,7,5],[6,4,2,8,4,9,5,7,1],[1,1,6,1,9,4,8,2,3],[2,6,4,1,3,1,7,8,8],[9,7,8,3,1,8,8,6,9]]
+        status = [[5,1,6,4,9,8,2,4,3],[7,6,4,3,4,8,2,9,3],[3,8,1,2,6,3,7,5,4],[6,2,4,8,1,1,3,7,3],[2,6,7,8,8,5,9,4,6],[1,9,5,7,8,6,3,1,2],[9,7,7,1,5,4,8,2,7],[7,1,9,3,2,7,5,6,8],[6,4,3,9,7,2,1,7,5]]
         resolucion = 4
         # Programatico
 
