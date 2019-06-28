@@ -284,3 +284,15 @@ class Auxiliar():
                 copy_status[fila][j] = 0
         return copy_status
 
+    def check_two_ceros(estado):
+        for i in range(len(estado) - 1):
+            for j in range(len(estado) - 1):
+                if estado[i][j] == estado[i][j + 1] == 0:
+                    return True
+        estado_traspuesta = [[estado[j][i] for j in range(len(estado))] for i in range(len(estado[0]))]
+        for i in range(len(estado_traspuesta) - 1):
+            for j in range(len(estado_traspuesta) - 1):
+                if estado_traspuesta[i][j] == estado_traspuesta[i][j + 1] == 0:
+                    return True
+        return False
+

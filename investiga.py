@@ -210,7 +210,8 @@ class CrossOut(probee.Acción):
         else:
             nuevo_estado[self.cell_row][self.cell_colum] = 0
             aux = auxiliar.Auxiliar.multipleCero(nuevo_estado)
-        if label(nuevo_estado)[1] != 1:
+
+        if label(nuevo_estado)[1] != 1 or auxiliar.Auxiliar.check_two_ceros(nuevo_estado) == True:
             nuevo_estado = estado
         return nuevo_estado
 
@@ -227,7 +228,7 @@ class CrossOut(probee.Acción):
             coste = coste - 10000 * number_colum
         if (number_row > 1):
             coste = coste - 10000 * number_row
-        return 1
+        return coste
 
 
 
